@@ -21,6 +21,7 @@ namespace UCMMarketplace.Models
         public string Title { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public Nullable<double> Price { get; set; }
         public string Condition { get; set; }
         public string Status { get; set; }

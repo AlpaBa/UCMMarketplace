@@ -35,36 +35,44 @@ namespace UCMMarketplace.Controllers
         [HttpPost]
         public ActionResult Add(item item)
         {
+            int UserID;
+            var username = Session["UserName"].ToString();
+            string imagefilename = "";
+                ucmmarketplaceEntities en = new ucmmarketplaceEntities();
+            UserID = en.users.Where(x => x.UserName == username).Select(x => x.UserId).FirstOrDefault();
             foreach (var file in item.Imagefile)
             {
                 //if (file.Contentlength > 0)
                 //{
-                int UserID;
-                var username = Session["UserName"].ToString();
-                ucmmarketplaceEntities en = new ucmmarketplaceEntities();
-                UserID = en.users.Where(x => x.UserName == username).Select(x => x.UserId).FirstOrDefault();
+
                 string filename = Path.GetFileNameWithoutExtension(file.FileName);
                 string extension = Path.GetExtension(file.FileName);
                 filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                item.ImagePath = "~/ItemImages/" + filename;
+                if (imagefilename == "")
+                {
+                    imagefilename = "~/ItemImages/" + filename;
+                }
+                else
+                {
+                    imagefilename = imagefilename + "|" + "~/ItemImages/" + filename;
+                }
                 filename = Path.Combine(Server.MapPath("~/ItemImages/"), filename);
                 file.SaveAs(filename);
+            }
                 using (ucmmarketplaceEntities itemimage = new ucmmarketplaceEntities())
                 {
-                    
+                    if (imagefilename != "") { item.ImagePath = imagefilename; }
                     item.Status = "Available";
                     item.Condition = item.ItemCond;
                     item.Price = Convert.ToDouble(item.Price);
                     item.CategoryID = Convert.ToInt32(item.CategoryList);
-                    
-                    
                     item.UploadUserID = Convert.ToInt32(UserID); 
                     itemimage.items.Add(item);
                     itemimage.SaveChanges();
 
                 }
                
-            }
+            
             ModelState.Clear();
             return RedirectToAction("Index", "Home");
 
@@ -89,6 +97,7 @@ namespace UCMMarketplace.Controllers
                 {
                     ItemID = x.ItemID,
                     Title = x.Title,
+                    Price = x.Price,
                     Description = x.Description,
                     Condition = x.Condition,
                     ImagePath = x.ImagePath,
@@ -165,7 +174,7 @@ namespace UCMMarketplace.Controllers
                 if (ModelState.IsValid)
                 {
                     itemimage.Title = item.Title;
-                    if (imagefilename == null) { 
+                    if (imagefilename == null || imagefilename=="") { 
                         itemimage.ImagePath = itemimage.ImagePath; 
                     } else {
                         itemimage.ImagePath = imagefilename; 

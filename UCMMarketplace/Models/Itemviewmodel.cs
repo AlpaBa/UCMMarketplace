@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 //Class to join Item and Category table and access thorught the project.
@@ -18,6 +19,7 @@ namespace UCMMarketplace.Models
         public int UploadUserID { get; set; }
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public Nullable<double> Price { get; set; }
     }
 }

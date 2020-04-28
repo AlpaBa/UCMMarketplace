@@ -104,7 +104,7 @@ namespace UCMMarketplace.Controllers
                 }
                 //send email to user
                 SendVerificationemail(user.EmailId);
-                message = "Registration successful" + user.UserName;
+                message = "Registration successful " + user.UserName;
                 Status = true;
             }
 
@@ -210,18 +210,18 @@ namespace UCMMarketplace.Controllers
             {
                 string UserPassowrd= Crypto.Hash(Password);
                 var v = entity.users.Where(a => a.UserName == UserName && a.Password == UserPassowrd).FirstOrDefault();
-                if (v == null) { ViewBag.message = "Invalid Login Details"; }
+                if (v == null) { ViewBag.message = "Invalid Login Details. If not already registered, please Register."; }
                 return v != null;
             }
         }
         [NonAction]
         public void SendVerificationemail(string emailID)
         {
-            var fromEmail = new MailAddress("ucmmarketemailid@gmail.com", "Account created");
+            var fromEmail = new MailAddress("ucmmarketemailid@gmail.com", "Welcome to UCM Marketplace");
             var toEmail = new MailAddress(emailID);
             var fromEmailpwd = "Ucmproject_1";
-            string subject = "Your account is created";
-            string body = "<br/><br/>Lets start selling and buying" +
+            string subject = "Your UCM Marketplace account is created.";
+            string body = "<br/><br/>Lets start selling and buying." +
                             "<br/><br/>";
             var smtp = new SmtpClient
             {
