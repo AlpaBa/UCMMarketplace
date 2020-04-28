@@ -1,0 +1,19 @@
+﻿@model IEnumerable<UCMMarketplace.Models.category>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="nav-item">
+    <ul class="list-group-horizontal">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                <a href=@Html.Partial("FilterByCategory",@item.CategoryID)>
+                   @*@Url.Action("FilterbyCategory","Home",new { id = UrlParameter.Optional })\@item.CategoryID">*@
+                    @item.CategoryName
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+  

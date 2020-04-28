@@ -1,0 +1,20 @@
+﻿@model IEnumerable<UCMMarketplace.Models.category>
+
+@{
+    ViewBag.Title = "Index";
+}
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid" id="Display">
+        @foreach (var item in Model)
+        {
+            <ul class="nav navbar-nav">
+                <li>
+                    @Ajax.ActionLink(@item.CategoryName, "FilterbyCategory", "Home", new { CategoryID = @item.CategoryID},
+                new AjaxOptions() { UpdateTargetId = "Display" })
+                </li>
+            </ul>
+         }
+            
+        </div>
+</nav>
+    @*@Html.Partial("FilterbyCategory", new UCMMarketplace.Models.ucmmarketplaceEntities().items.Where(ctg => ctg.CategoryID == @item.CategoryID).ToList())"*@

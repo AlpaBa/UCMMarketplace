@@ -1,0 +1,190 @@
+﻿@model IEnumerable<UCMMarketplace.Models.Itemviewmodel>
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Styles.Render("~/Content/css/bootstrap-min.css")
+<!--Bootstrap-->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!--Latest stable release of jQuery Core Library-->
+<script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
+
+<!--Bootstrap JS-->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+</script>
+<style>
+    .modal-backdrop {
+        z-index: -1;
+    }
+</style>
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Item Details</h2>
+
+<div>
+    @*<h4>item</h4>*@
+    <hr />
+    @if (Model != null)
+    {
+        var s = "";
+        foreach (var modelitem in Model)
+        {
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => modelitem.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => modelitem.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => modelitem.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => modelitem.CategoryName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Condition)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => modelitem.Condition)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => modelitem.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+        <dd>
+            @{
+                //var s = Model.Book.Author_name.ToString();
+                s = modelitem.ImagePath;
+                string[] imgpath = s.Split('|');
+                <ul class="list-inline">
+                    <li data-toggle="modal" data-target="#myModal">
+                        <a href="#myGallery" data-slide-to="0">
+                            <img src="@Url.Content(imgpath[0])" width="200" height="200" class="img-thumbnail" />
+                        </a>
+                    </li>
+                    <!--end of thumbnails-->
+                </ul>
+
+                <p />
+                <p />
+                <table class="dl-horizontal">
+                    <tr>
+                        @for (int i = 1; i < imgpath.Length; i++)
+                        {
+
+                            <td>
+                                <ul class="list-inline">
+                                    <li data-toggle="modal" data-target="#myModal">
+                                        <a href="#myGallery" data-slide-to=@i>
+                                            <img src="@Url.Content(imgpath[i])" width="200" height="200" class="img-thumbnail" />
+                                        </a>
+                                    </li>
+                                    <!--end of thumbnails-->
+                                </ul>
+                            </td>
+
+                        }
+                    </tr>
+                </table>
+
+            }
+        </dd>
+        <dd>
+            @if (Session["UserName"] != null && modelitem.UploadUserID == ViewBag.UserId)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = modelitem.ItemID })
+                <b>|</b>
+                @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
+            }
+            else
+            {
+                @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
+            }
+        </dd>
+    </dl>
+        }
+        ViewBag.Array = s;
+
+    
+}
+@*<dd>
+        @Html.DisplayFor(model => model.ImagePath)
+    </dd>*@
+</div>
+ <!--begin modal window-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="pull-left">My Gallery Title</div>
+                <button type="button" class="close" data-dismiss="modal" title="Close"> <span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+            <div class="modal-body">
+                <!--begin carousel-->
+                <div id="myGallery" class="carousel slide" data-interval="false">
+                    <div class="carousel-inner">
+                        @{
+                            
+                            var s1 = ViewBag.Array;
+
+                            string[] imgpath1 = s1.Split('|');
+                            for (int i = 0; i < imgpath1.Length; i++)
+                            {
+                                //var s = Model.Book.Author_name.ToString();
+                                if (i == 0)
+                                {
+                                    <div class="item active">
+                                        <img src="@Url.Content(imgpath1[0])" class="img-thumbnail" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <img src="@Url.Content(imgpath1[i])" class="img-thumbnail" />
+                                    </div>
+                                }
+                            }
+                        }
+                        <!--end carousel-inner-->
+                    </div>
+                    <!--Begin Previous and Next buttons-->
+                    <a class="left carousel-control" href="#myGallery" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#myGallery" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <!--end carousel-->
+                    <!--end modal-body-->
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <small>Item Gallery</small>
+                    </div>
+                    <button class="btn-sm close" type="button" data-dismiss="modal" onclick="yourModal">Close</button>
+                    <!--end modal-footer-->
+                </div>
+                <!--end modal-content-->
+            </div>
+            <!--end modal-dialoge-->
+        </div>
+    </div>
+    <!--end myModal-->
+</div>
+<script>
+    $("#yourModal").modal("hide"); 
+</script>

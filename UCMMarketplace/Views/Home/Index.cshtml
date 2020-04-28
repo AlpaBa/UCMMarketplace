@@ -1,0 +1,32 @@
+﻿@model IEnumerable<UCMMarketplace.Models.item>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h3>Happy Shopping</h3>
+<div class="container-fluid">
+    @Html.Partial("GetCategory",new UCMMarketplace.Models.ucmmarketplaceEntities().categories.Where(ctg => ctg.CategoryID != 0).ToList())
+</div>
+<div class="container body-content">
+    <div class="row">
+        @foreach (var i in @Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
+                    @{
+                        //var s = Model.Book.Author_name.ToString();
+                        var s = i.ImagePath.ToString();
+                        string[] imgpath = s.Split('|');
+                        <img src="@Url.Content(imgpath[0])" class="img-thumbnail" />
+                    }
+                </a>
+                <p>
+                    @i.Title
+                    @*<img src="@Url.Content("~\\wishlist image.jpg")" width="40" height="40"/>*@
+                </p>
+                <p></p>
+            </div>
+        }
+    </div>
+</div>
+
