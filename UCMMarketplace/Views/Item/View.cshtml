@@ -115,11 +115,18 @@
                 <b>|</b>
                 @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
                 <b>|</b>
-                @Html.ActionLink("Send Message", "Edit", new { id = modelitem.ItemID })
+                @Html.ActionLink("Send Message", "ShowMessage", "Message", null, new { id = modelitem.ItemID })
             }
             else
             {
                 @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
+                <b>|</b>
+               
+                    @Html.Action("ShowMessage", "Message", new { itemID = modelitem.ItemID })
+       
+                   @* @Html.Partial("ShowMessage", new UCMMarketplace.Models.GetUserData, ViewData.))*@
+                   @* @Html.Partial("ShowMessage", new ViewDataDictionary { {"ItemId",modelitem.ItemID } })*@
+                
             }
         </dd>
     </dl>

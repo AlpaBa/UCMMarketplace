@@ -181,6 +181,7 @@
     <Compile Include="Models\category.cs">
       <DependentUpon>ucmmarketplaceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetUserData.cs" />
     <Compile Include="Models\item.cs">
       <DependentUpon>ucmmarketplaceModel.tt</DependentUpon>
     </Compile>
@@ -377,6 +378,7 @@
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Shared\FilterbyCategory.cshtml" />
     <Content Include="Views\Shared\GetCategory.cshtml" />
+    <Content Include="Views\Shared\ShowMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

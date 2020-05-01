@@ -49,8 +49,7 @@ namespace UCMMarketplace.Controllers
                 {
                     ViewBag.Status = false;
                     return View();
-                }
-               
+                }              
                 //Email is already Exists
                 //var isExist = IsEmailExist(user.UserName);
                 //if (isExist)
@@ -69,9 +68,6 @@ namespace UCMMarketplace.Controllers
 
                 //}
             }
-
-           // ViewBag.Message = message;
-            //ViewBag.Status = LogStatus;
            return View();
         }
         //Registration POST action
