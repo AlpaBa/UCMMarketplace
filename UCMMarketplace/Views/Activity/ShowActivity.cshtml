@@ -1,0 +1,33 @@
+﻿@model IEnumerable<UCMMarketplace.Models.Itemviewmodel>
+
+<div>
+    <h2>My Activity</h2>
+    <hr />
+    <div class="container body-content">
+        <div class="row">
+            @foreach (var i in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
+                        @{
+                            //var s = Model.Book.Author_name.ToString();
+                            var s = i.ImagePath.ToString();
+                            string[] imgpath = s.Split('|');
+                            <img src="@Url.Content(imgpath[0])" class="img-thumbnail" />
+                        }
+                    </a>
+                    <p>
+                        @i.Title | @i.Status
+               
+                    </p>
+                    <p></p>
+                </div>
+            }
+        </div>
+    </div>
+
+   
+</div>
+<p> 
+    @Html.ActionLink("Home", "Index", "Home", null, null)
+</p>

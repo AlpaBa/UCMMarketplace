@@ -26,8 +26,6 @@ namespace UCMMarketplace.Controllers
                     UserId = x.user.UserId,
                     UserName = x.user.UserName,
                     ItemTitle = x.Title,
-                    //need to add for if user not login
-                    SenderUserName = Session["UserName"].ToString()
                 }).Where(x => x.ItemID == itemId && x.UploadUserID == x.UserId).ToList();
                 return PartialView(itemlist);
             }
@@ -37,7 +35,7 @@ namespace UCMMarketplace.Controllers
         public ActionResult SendMessage(string emailid,string strmessage,string sendername,string recievername, string itemtitle, int itemid)
         {
             SendVerificationemail(emailid, strmessage, sendername, recievername,itemtitle);
-            return View();
+            return RedirectToAction("View","Item", new { id = itemid });
         }
         [NonAction]
         public void SendVerificationemail(string emailID,string strMessage, string sendername, string recievername, string itemtitle)

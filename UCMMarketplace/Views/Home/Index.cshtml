@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<h3>Happy Shopping</h3>
+<h3>Happy Buying and Selling</h3>
 <div class="container-fluid">
     @Html.Partial("GetCategory",new UCMMarketplace.Models.ucmmarketplaceEntities().categories.Where(ctg => ctg.CategoryID != 0).ToList())
 </div>
@@ -22,6 +22,9 @@
                 </a>
                 <p>
                     @i.Title
+                  
+                    @*<a><span class="glyphicon glyphicon-heart-empty"></span></a>*@
+                    
                     @*<img src="@Url.Content("~\\wishlist image.jpg")" width="40" height="40"/>*@
                 </p>
                 <p></p>

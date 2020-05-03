@@ -57,7 +57,14 @@
         ViewBag.itemid = Convert.ToInt32(ViewBag.itemid);
         ViewBag.recievername = i.UserName;
         ViewBag.EmailId = i.EmailId;
-        ViewBag.sendername = i.SenderUserName;
+        if (Session["UserName"] != null)
+        {
+            ViewBag.sendername = i.SenderUserName;
+        }
+        else
+        {
+            ViewBag.sendername = "Buyer";
+        }
         ViewBag.itemtitle = i.ItemTitle;
 
     }
@@ -76,7 +83,9 @@
                     <h4 class="modal-title" id="myModalLabel">@ViewBag.recievername</h4>
                 </div>
                 <div class="modal-body">
-                    @Html.TextBox("Mymessage")
+                    @* @Html.TextBox("Mymessage")*@
+                    <textarea id="Mymessage" class="form-control" style="min-width: 100%"></textarea>
+                   @* @Html.TextArea("Mymessage", "Enter Message", new { @style = "color:black" })*@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -104,8 +113,11 @@
         
         var url = '@Html.Raw(@Url.Action("SendMessage", "Message", new { emailid = @ViewBag.EmailId, sendername = @ViewBag.sendername, strmessage = "strMessage", recievername = @ViewBag.recievername , itemtitle= @ViewBag.itemtitle, itemid= @ViewBag.itemid }))' ;  //, itemid = @Convert.ToInt32(ViewBag.ItemID) }
         var msg = $('#Mymessage').val();
-        url = url.replace('strMessage', msg);
-        window.location.href = url;
+        if (msg != "") {
+            url = url.replace('strMessage', msg);
+            window.location.href = url;
+        }
+        
     });
     </script>
 @*<script type="text/javascript">

@@ -18,7 +18,9 @@ namespace UCMMarketplace.Models
     public partial class item
     {
         public long ItemID { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Display(Name = "Image File")]
         public string ImagePath { get; set; }
         public string Description { get; set; }
         [DisplayFormat(DataFormatString = "{0:C}")]

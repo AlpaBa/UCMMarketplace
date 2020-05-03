@@ -169,6 +169,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
@@ -379,6 +380,7 @@
     <Content Include="Views\Shared\FilterbyCategory.cshtml" />
     <Content Include="Views\Shared\GetCategory.cshtml" />
     <Content Include="Views\Shared\ShowMessage.cshtml" />
+    <Content Include="Views\Activity\ShowActivity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
