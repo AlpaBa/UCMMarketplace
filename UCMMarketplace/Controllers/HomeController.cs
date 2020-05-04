@@ -16,6 +16,18 @@ namespace UCMMarketplace.Controllers
             ucmmarketplaceEntities en = new ucmmarketplaceEntities();
             return View(en.items.ToList());
         }
+        public ActionResult About()
+        {
+            ViewBag.Message = "Buy-Sell-Go";
+
+            return View();
+        }
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "";
+
+            return View();
+        }
         // GET: Category
         [HttpGet]
         public PartialViewResult GetCategory()
