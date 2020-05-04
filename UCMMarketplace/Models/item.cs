@@ -42,7 +42,7 @@ namespace UCMMarketplace.Models
         [DataType(DataType.Upload)]
         [Display(Name = "Upload Image File")]
         [Required(ErrorMessage = "Please choose file to upload.")]
-        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.jpeg)$", ErrorMessage = "Only Image files allowed.")]
+       // [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.jpeg)$", ErrorMessage = "Only Image files allowed.")]
         public HttpPostedFileBase[] Imagefile
         {
             get; set;
