@@ -28,5 +28,7 @@ namespace UCMMarketplace.Models
         public virtual DbSet<category> categories { get; set; }
         public virtual DbSet<item> items { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<message> messages { get; set; }
+        public virtual DbSet<wishlist> wishlists { get; set; }
     }
 }

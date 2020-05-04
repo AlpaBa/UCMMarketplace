@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UCMMarketplace.Models;
-
+//Created by :Alpa Bandekar
+//Date: 05/1/2020
 namespace UCMMarketplace.Controllers
 {
     public class ActivityController : Controller
     {
+        //Shows User Activity
         [HttpGet]
         public ActionResult ShowActivity()
         {
@@ -38,80 +40,7 @@ namespace UCMMarketplace.Controllers
             {
                 return View();
             }
-           
-            
-        }
-
-        // GET: Acitivity/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Acitivity/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Acitivity/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Acitivity/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Acitivity/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Acitivity/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Acitivity/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+    
         }
     }
 }

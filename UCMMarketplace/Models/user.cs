@@ -20,7 +20,7 @@ namespace UCMMarketplace.Models
         {
             this.items = new HashSet<item>();
         }
-    
+
         public int UserId { get; set; }
         [Required]
         public string UserName { get; set; }
@@ -29,7 +29,7 @@ namespace UCMMarketplace.Models
         [StringLength(255, ErrorMessage = "Must be minimum 8 characters", MinimumLength = 8)]
         public string Password { get; set; }
         //[Required]
-        [StringLength(9, ErrorMessage = "Invalid StudentID", MinimumLength = 9)]
+        [RegularExpression(@"^(?!00000)[0-9]{9,9}$", ErrorMessage = "Enter valid Student ID")]
         public Nullable<int> StudentId { get; set; }
         [Display(Name = "Email Address")]
         //[Required(ErrorMessage = "Email is required.")]
@@ -37,5 +37,6 @@ namespace UCMMarketplace.Models
         public string EmailId { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> items { get; set; }
+       // public virtual ICollection<wishlist> wishlists { get; set; }
     }
 }

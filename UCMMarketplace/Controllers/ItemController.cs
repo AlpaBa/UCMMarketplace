@@ -38,15 +38,13 @@ namespace UCMMarketplace.Controllers
             int UserID;
             var username = Session["UserName"].ToString();
             string imagefilename = "";
-                ucmmarketplaceEntities en = new ucmmarketplaceEntities();
+            ucmmarketplaceEntities en = new ucmmarketplaceEntities();
             UserID = en.users.Where(x => x.UserName == username).Select(x => x.UserId).FirstOrDefault();
             foreach (var file in item.Imagefile)
             {
-                //if (file.Contentlength > 0)
-                //{
-
                 string filename = Path.GetFileNameWithoutExtension(file.FileName);
                 string extension = Path.GetExtension(file.FileName);
+                
                 filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
                 if (imagefilename == "")
                 {
@@ -158,17 +156,22 @@ namespace UCMMarketplace.Controllers
                 {
                     if (file != null)
                     {
-                        string filename = Path.GetFileNameWithoutExtension(file.FileName);
-                        string extension = Path.GetExtension(file.FileName);
-                        filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                       // item.ImagePath = "~/ItemImages/" + filename;
-                        filename1 = Path.Combine(Server.MapPath("~/ItemImages/"), filename);
-                        file.SaveAs(filename1);
-                        if (imagefilename == "") { 
-                            imagefilename = "~/ItemImages/" + filename; 
-                        }else{ 
-                            imagefilename = imagefilename + "|" + "~/ItemImages/" + filename; 
-                        }
+                        
+                            string filename = Path.GetFileNameWithoutExtension(file.FileName);
+                            string extension = Path.GetExtension(file.FileName);
+                            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                            // item.ImagePath = "~/ItemImages/" + filename;
+                            filename1 = Path.Combine(Server.MapPath("~/ItemImages/"), filename);
+                            file.SaveAs(filename1);
+                            if (imagefilename == "")
+                            {
+                                imagefilename = "~/ItemImages/" + filename;
+                            }
+                            else
+                            {
+                                imagefilename = imagefilename + "|" + "~/ItemImages/" + filename;
+                            }
+                        
                     }
                 }
                 if (ModelState.IsValid)
@@ -209,9 +212,9 @@ namespace UCMMarketplace.Controllers
                     return RedirectToAction("View", new { id = itemimage.ItemID });
                 
             }
-
-
-
+        
         }
+
+
     }
 }

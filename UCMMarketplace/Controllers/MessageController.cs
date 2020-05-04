@@ -34,11 +34,11 @@ namespace UCMMarketplace.Controllers
         // GET: Message/Details/5
         public ActionResult SendMessage(string emailid,string strmessage,string sendername,string recievername, string itemtitle, int itemid)
         {
-            SendVerificationemail(emailid, strmessage, sendername, recievername,itemtitle);
+            SendMessageEmail(emailid, strmessage, sendername, recievername,itemtitle);
             return RedirectToAction("View","Item", new { id = itemid });
         }
         [NonAction]
-        public void SendVerificationemail(string emailID,string strMessage, string sendername, string recievername, string itemtitle)
+        public void SendMessageEmail(string emailID,string strMessage, string sendername, string recievername, string itemtitle)
         {
             var fromEmail = new MailAddress("ucmmarketemailid@gmail.com", "Welcome to UCM Marketplace");
             var toEmail = new MailAddress(emailID);
@@ -53,7 +53,7 @@ namespace UCMMarketplace.Controllers
                 Port = 587,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = true,
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromEmail.Address, fromEmailpwd)
             };
             using (var message = new MailMessage(fromEmail, toEmail)
@@ -63,72 +63,6 @@ namespace UCMMarketplace.Controllers
                 IsBodyHtml = true
             })
                 smtp.Send(message);
-        }
-
-        // GET: Message/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Message/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Message/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Message/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Message/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Message/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        }    
     }
 }

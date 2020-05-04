@@ -43,6 +43,14 @@ namespace UCMMarketplace.Controllers
                 {
                     ViewBag.Status = true;
                     Session["UserName"] = user.UserName;
+                    using (ucmmarketplaceEntities en = new ucmmarketplaceEntities())
+                    {
+                        user email = new user();
+                        string password = Crypto.Hash(user.Password);
+                        email= en.users.Where(x => x.UserName == user.UserName && x.Password == password).Select(x=> x).FirstOrDefault();
+                        Session["EmailId"] = email.EmailId;
+                    }
+                
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -119,77 +127,6 @@ namespace UCMMarketplace.Controllers
             return View();
         }
 
-        // GET: Login/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Login/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Login/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Login/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Login/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Login/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Login/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
         [NonAction]
         public bool IsEmailExist(string emailID)
         {
@@ -205,7 +142,7 @@ namespace UCMMarketplace.Controllers
             using (ucmmarketplaceEntities entity = new ucmmarketplaceEntities())
             {
                 string UserPassowrd= Crypto.Hash(Password);
-                var v = entity.users.Where(a => a.UserName == UserName && a.Password == UserPassowrd).FirstOrDefault();
+                var v = entity.users.Where(a => a.UserName == UserName && a.Password == UserPassowrd).Select(a => new { a.UserName, a.Password,a.EmailId }).FirstOrDefault();
                 if (v == null) { ViewBag.message = "Invalid Login Details. If not already registered, please Register."; }
                 return v != null;
             }
@@ -213,28 +150,35 @@ namespace UCMMarketplace.Controllers
         [NonAction]
         public void SendVerificationemail(string emailID)
         {
-            var fromEmail = new MailAddress("ucmmarketemailid@gmail.com", "Welcome to UCM Marketplace");
-            var toEmail = new MailAddress(emailID);
-            var fromEmailpwd = "Ucmproject_1";
-            string subject = "Your UCM Marketplace account is created.";
-            string body = "<br/><br/>Lets start selling and buying." +
-                            "<br/><br/>";
-            var smtp = new SmtpClient
+            try
             {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = true,
-                Credentials = new NetworkCredential(fromEmail.Address, fromEmailpwd)
-            };
-            using (var message = new MailMessage(fromEmail, toEmail)
+                var fromEmail = new MailAddress("ucmmarketemailid@gmail.com", "Welcome to UCM Marketplace");
+                var toEmail = new MailAddress(emailID);
+                var fromEmailpwd = "Ucmproject_1";
+                string subject = "Your UCM Marketplace account is created.";
+                string body = "<br/><br/>Lets start selling and buying." +
+                                "<br/><br/>";
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false, //to remove credentials error
+                    Credentials = new NetworkCredential(fromEmail.Address, fromEmailpwd)
+                };
+                using (var message = new MailMessage(fromEmail, toEmail)
+                {
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                })
+                    smtp.Send(message);
+            }
+            catch (Exception)
             {
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            })
-                smtp.Send(message);
+                ModelState.AddModelError("message", "Could not send Welcome Email");
+            }
         }
 
     }

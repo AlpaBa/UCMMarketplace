@@ -3,33 +3,72 @@
 @{
     ViewBag.Title = "Index";
 }
-<h3>Happy Buying and Selling</h3>
-<div class="container-fluid">
-    @Html.Partial("GetCategory",new UCMMarketplace.Models.ucmmarketplaceEntities().categories.Where(ctg => ctg.CategoryID != 0).ToList())
-</div>
-<div class="container body-content">
-    <div class="row">
-        @foreach (var i in @Model)
-        {
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
-                    @{
-                        //var s = Model.Book.Author_name.ToString();
-                        var s = i.ImagePath.ToString();
-                        string[] imgpath = s.Split('|');
-                        <img src="@Url.Content(imgpath[0])" class="img-thumbnail" />
-                    }
-                </a>
-                <p>
-                    @i.Title
-                  
-                    @*<a><span class="glyphicon glyphicon-heart-empty"></span></a>*@
-                    
-                    @*<img src="@Url.Content("~\\wishlist image.jpg")" width="40" height="40"/>*@
-                </p>
-                <p></p>
-            </div>
-        }
-    </div>
-</div>
 
+    <h3>Happy Buying and Selling</h3>
+    <div class="container-fluid">
+        @Html.Partial("GetCategory", new UCMMarketplace.Models.ucmmarketplaceEntities().categories.Where(ctg => ctg.CategoryID != 0).ToList())
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            @foreach (var i in @Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
+                        @{
+                            //var s = Model.Book.Author_name.ToString();
+                            var s = i.ImagePath.ToString();
+                            string[] imgpath = s.Split('|');
+                            <img src="@Url.Content(imgpath[0])" class="img-thumbnail" />
+                        }
+                    </a>
+                    <p>
+                        @i.Title
+                        @*@if (Session["UserName"] != null)
+                            {
+                               <a href="#" class="addWish" data-product=@i.ItemID><span class="glyphicon glyphicon-heart-empty"></span></a>
+                             @*<button type="button" id="addWish" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-heart-empty"></span>
+                            </button>}*@
+
+                        @*<button type="button" id="RemovefromWishlist" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-heart"></span>
+                            </button>*@
+
+                    </p>
+                    <p></p>
+                </div>
+            }
+        </div>
+    </div>
+
+@*<script>*@
+    @*$("#SaveItemtoWishlist").click(function(event)
+    {
+        event.preventDefault();
+        var url = '@Html.Raw(@Url.Action("SaveItemtoWishlist", "Wishlist", new { itemid= @ViewBag.itemid }))' ;  
+        $(this).find(".glyphicon").removeClass("glyphicon-heart-empty").addClass("glyphicon-heart");
+        window.location.href= url;
+        //$(this).toggleClass('glyphicon glyphicon-heart-empty').toggleClass('glyphicon glyphicon-heart');
+    });*@
+    @*$('.addWish').click(function(e) {
+         e.preventDefault();
+        var el = $(this),
+            icon = el.find('i'), //<-- new
+            itemid = el.data("product");
+            // some_user_id = 2; //get user id.. 
+         $.ajax({
+             url: '@Url.Action("SaveItemtoWishlist", "Wishlist")',
+             data: { "id": itemid },
+             done: function (result) {
+                 // our methods return true or false
+                 if (result) {
+                   alert('added to fav');
+                     $(this).removeClass().addClass('glyphicon glyphicon-heart-empty'); //<-- new
+                 } else {
+                   alert('removed from fav');
+                     $(this).removeClass().addClass('glyphicon glyphicon-heart'); //<-- new
+                 }
+             }
+         });
+});*@
+@*</script>*@

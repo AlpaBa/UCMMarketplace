@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\WishlistController.cs" />
     <Compile Include="Crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,6 +188,9 @@
       <DependentUpon>ucmmarketplaceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Itemviewmodel.cs" />
+    <Compile Include="Models\message.cs">
+      <DependentUpon>ucmmarketplaceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ucmmarketplaceModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,6 +207,9 @@
       <DependentUpon>ucmmarketplaceModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
+      <DependentUpon>ucmmarketplaceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\wishlist.cs">
       <DependentUpon>ucmmarketplaceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -386,6 +393,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="ItemImages\" />
     <Folder Include="Views\Message\" />
+    <Folder Include="Views\Wishlist\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

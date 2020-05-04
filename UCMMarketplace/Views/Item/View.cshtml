@@ -26,6 +26,7 @@
     <hr />
     @if (Model != null)
     {
+        
         var s = "";
         foreach (var modelitem in Model)
         {
@@ -74,6 +75,7 @@
             @{
                 //var s = Model.Book.Author_name.ToString();
                 s = modelitem.ImagePath;
+                ViewBag.ItemId = modelitem.ItemID;
                 string[] imgpath = s.Split('|');
                 <ul class="list-inline">
                     <li data-toggle="modal" data-target="#myModal">
@@ -105,27 +107,34 @@
                         }
                     </tr>
                 </table>
-
             }
         </dd>
         <dd>
+
             @if (Session["UserName"] != null && modelitem.UploadUserID == ViewBag.UserId)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = modelitem.ItemID })
+        <b>|</b>
+        @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
+
+                // @Html.Action("ShowMessage", "Message", new { itemID = modelitem.ItemID })
+    }
+            else if (Session["UserName"] != null && modelitem.UploadUserID != ViewBag.UserId)
             {
-            @Html.ActionLink("Edit", "Edit", new { id = modelitem.ItemID })
-            <b>|</b>
-            @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
-            <b>|</b>
-            @Html.Action("ShowMessage", "Message", new { itemID = modelitem.ItemID })
+                @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
+                <b>| Contact: @Session["EmailId"].ToString()</b>
+                
             }
             else
             {
-            @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
-            <b>|</b>
+                @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
+                <b>|</b>
+                <button id="contact" onclick="myFunction()">Contact</button>
+                // <a href=@Url.Action("ShowMessage", "Message", new { itemID = modelitem.ItemID })>Send Message</a>
 
-            @Html.Action("ShowMessage", "Message", new { itemID = modelitem.ItemID })
 
-            @* @Html.Partial("ShowMessage", new UCMMarketplace.Models.GetUserData, ViewData.))*@
-            @* @Html.Partial("ShowMessage", new ViewDataDictionary { {"ItemId",modelitem.ItemID } })*@
+                @* @Html.Partial("ShowMessage", new UCMMarketplace.Models.GetUserData, ViewData.))*@
+                @* @Html.Partial("ShowMessage", new ViewDataDictionary { {"ItemId",modelitem.ItemID } })*@
 
             }
         </dd>
@@ -135,9 +144,7 @@
 
     
 }
-@*<dd>
-        @Html.DisplayFor(model => model.ImagePath)
-    </dd>*@
+
 </div>
  <!--begin modal window-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -196,4 +203,7 @@
 </div>
 <script>
     $("#yourModal").modal("hide"); 
+    function myFunction() {
+        alert("Please Register to see contact details");
+    }
 </script>
