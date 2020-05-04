@@ -178,6 +178,7 @@ namespace UCMMarketplace.Controllers
             catch (Exception)
             {
                 ModelState.AddModelError("message", "Could not send Welcome Email");
+                ModelState.Clear();
             }
         }
 

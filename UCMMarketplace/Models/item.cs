@@ -26,7 +26,6 @@ namespace UCMMarketplace.Models
         [Required]
         public string Title { get; set; }
         [Display(Name = "Upload Image File")]
-        [Required(ErrorMessage = "Please choose file to upload.")]
         //[RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.jpeg)$", ErrorMessage = "Only Image files allowed.")]
         public string ImagePath { get; set; }
         public string Description { get; set; }
@@ -43,14 +42,14 @@ namespace UCMMarketplace.Models
         [DataType(DataType.Upload)]
         [Display(Name = "Upload Image File")]
         [Required(ErrorMessage = "Please choose file to upload.")]
-        //[RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.jpeg)$", ErrorMessage = "Only Image files allowed.")]
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.jpeg)$", ErrorMessage = "Only Image files allowed.")]
         public HttpPostedFileBase[] Imagefile
         {
             get; set;
         }
         public string ItemCond { get; set; }
         [Display(Name = "Select Category Name")]
-        [Required]
+        //[Required]
         public string CategoryList { get; set; }
         public string CategoryName { get; set; }
         //public virtual ICollection<wishlist> wishlists { get; set; }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication2.Models.Itemviewmodel>
+﻿@model IEnumerable<UCMMarketplace.Models.Itemviewmodel>
 
 @{
     ViewBag.Title = "FilterSortCategory";
@@ -7,7 +7,7 @@
 <h3>Happy Shopping</h3>
 <div class="container body-content">
     <div class="row">
-        @foreach (WebApplication2.Models.Itemviewmodel i in @Model)
+        @foreach (UCMMarketplace.Models.Itemviewmodel i in @Model)
         {
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">

@@ -75,7 +75,7 @@
             @{
                 //var s = Model.Book.Author_name.ToString();
                 s = modelitem.ImagePath;
-                ViewBag.ItemId = modelitem.ItemID;
+               // ViewBag.ItemId = modelitem.ItemID;
                 string[] imgpath = s.Split('|');
                 <ul class="list-inline">
                     <li data-toggle="modal" data-target="#myModal">
@@ -112,13 +112,13 @@
         <dd>
 
             @if (Session["UserName"] != null && modelitem.UploadUserID == ViewBag.UserId)
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = modelitem.ItemID })
-        <b>|</b>
-        @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
+             {
+                @Html.ActionLink("Edit", "Edit", new { id = modelitem.ItemID })
+                <b>|</b>
+                @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
 
                 // @Html.Action("ShowMessage", "Message", new { itemID = modelitem.ItemID })
-    }
+             }
             else if (Session["UserName"] != null && modelitem.UploadUserID != ViewBag.UserId)
             {
                 @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
