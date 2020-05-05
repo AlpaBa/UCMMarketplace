@@ -1,37 +1,53 @@
 ﻿@model IEnumerable<UCMMarketplace.Models.Itemviewmodel>
 
 @{
-    ViewBag.Title = "FilterbyCategory";
+                /**/
+
+                ViewBag.Title = "FilterbyCategory";
 }
 @*@Html.Action("Index", "Home")*@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h3>Happy Shopping</h3>
-<div class="container-fluid">
-    @Html.Partial("GetCategory", new UCMMarketplace.Models.ucmmarketplaceEntities().categories.Where(ctg => ctg.CategoryID != 0).ToList())
-</div>
-<div class="container body-content">
-    <div class="row">
-        @foreach (var i in @Model)
-        {
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
-                    @{
-                        //var s = Model.Book.Author_name.ToString();
-                        var s = i.ImagePath.ToString();
-                        string[] imgpath = s.Split('|');
-                        <img src="@Url.Content(imgpath[0])" class="img-thumbnail" />
-                    }
-                </a>
-                <p>
-                    @i.Title
-                    <!--<img src="@Url.Content("~\\wishlist image.jpg")" width="40" height="40"/>-->
-                </p>
-                <p></p>
-            </div>
-        }
+<style>
+    .thumbnail img {
+        height: 250px;
+        width: 100%;
+    }
+</style>
+<h3>Happy Buying and Selling</h3>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{ 
+    
+    <div class="container-fluid">
+        <div>@Html.TextBox("search")<input type="submit" value="Search" /></div>
+        @Html.Partial("GetCategory", new UCMMarketplace.Models.ucmmarketplaceEntities().categories.Where(ctg => ctg.CategoryID != 0).ToList())
     </div>
-</div>
+    <div class="container body-content">
+        <div class="row">
+            @foreach (var i in @Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
+                        <div class="thumbnail">
+                            @{
+                                //var s = Model.Book.Author_name.ToString();
+                                var s = i.ImagePath.ToString();
+                                string[] imgpath = s.Split('|');
+                                <img src="@Url.Content(imgpath[0])" class="img-thumbnail" />
+                            }
+                            @i.Title
+                        </div>
+                    </a>
+                    @*<p>
+                        @i.Title
+                        <img src="@Url.Content("~\\wishlist image.jpg")" width="40" height="40"/>
+                    </p>*@
+                    <p></p>
+                </div>
 
+            }
+        </div>
+    </div>
 
+}

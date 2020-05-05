@@ -9,6 +9,7 @@
     <div class="row">
         @foreach (UCMMarketplace.Models.Itemviewmodel i in @Model)
         {
+            @Html.TextBox("Search"); <input type="button" value="search"/>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
                     @{

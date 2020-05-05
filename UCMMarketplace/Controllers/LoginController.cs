@@ -93,7 +93,7 @@ namespace UCMMarketplace.Controllers
                 var isExist = IsEmailExist(user.UserName);
                 if (isExist)
                 {
-                    ModelState.AddModelError("AccountExist", "Account already exists");
+                    ModelState.AddModelError("AccountExist", "Account already exist.");
                     return View(user);
                 }
                 //password hashing
@@ -108,7 +108,7 @@ namespace UCMMarketplace.Controllers
                 }
                 //send email to user
                 SendVerificationemail(user.EmailId);
-                message = "Registration successful " + user.UserName;
+                message = user.UserName + " your registration is successful. Please login to your account.";
                 Status = true;
             }
 

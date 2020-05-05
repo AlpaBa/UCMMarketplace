@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<UCMMarketplace.Models.Itemviewmodel>
-
+<style>
+    .thumbnail img {
+        height: 250px;
+        width: 100%;
+    }
+</style>
 <div>
     <h2>My Activity</h2>
     <hr />
@@ -7,15 +12,18 @@
         <div class="row">
             @foreach (var i in Model)
             {
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
+                    <div class="thumbnail">
                         @{
                             //var s = Model.Book.Author_name.ToString();
                             var s = i.ImagePath.ToString();
                             string[] imgpath = s.Split('|');
                             <img src="@Url.Content(imgpath[0])" class="img-thumbnail" />
                         }
-                    </a>
+                    </div>
+                </a>
+           
                     <p>
                         @i.Title | @i.Status
                

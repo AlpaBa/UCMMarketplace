@@ -12,109 +12,122 @@
     @Html.AntiForgeryToken()
     
 
-<div class="form-horizontal">
-  
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ItemID)
+    <div class="form-horizontal">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ItemID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-            @*@Html.ValidationMessageFor(model => model.Price, "Description required", new { @class = "text-danger" })*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @* @Html.DropDownList("ItemCond",
-        new SelectList(Enum.GetValues(typeof(UCMMarketplace.Models.ItemCondition))),
-        "Select Condition",
-        new { @class = "form-control" })*@
-            @Html.DropDownListFor(model => model.Condition, ViewBag.ItemCondition as List<SelectListItem>, new { @class = "form-control" } )
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @* @Html.DropDownList("ItemCond",
+                    new SelectList(Enum.GetValues(typeof(UCMMarketplace.Models.ItemCondition))),
+                    "Select Condition",
+                    new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.Condition, ViewBag.ItemCondition as List<SelectListItem>, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryList, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryList, ViewBag.categoryname as SelectList , new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryList, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Status, ViewBag.ItemStatus as List<SelectListItem>, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
             
+      
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="Imagefile" multiple />
+                <p style="color:darkcyan;">Please upload file of type ".jpg, .png, .jpeg"</p>
+                @*   <img src="@Url.Content(Model.ImagePath)" width="150" height="250" />*@
+                @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                @{
+
+                    var s = Model.ImagePath;
+                    string[] imgpath = s.Split('|');
+                    <ul class="list-inline">
+                        <li data-toggle="modal" data-target="#myModal">
+                            <a href="#myGallery" data-slide-to="0">
+                                <img src="@Url.Content(imgpath[0])" width="200" height="200" class="img-thumbnail" />
+                            </a>
+                        </li>
+                        <!--end of thumbnails-->
+                    </ul>
+
+                    <p />
+                    <p />
+                    <table class="dl-horizontal">
+                        <tr>
+                            @for (int i = 1; i < imgpath.Length; i++)
+                            {
+
+                                <td>
+                                    <ul class="list-inline">
+                                        <li data-toggle="modal" data-target="#myModal">
+                                            <a href="#myGallery" data-slide-to=@i>
+                                                <img src="@Url.Content(imgpath[i])" width="200" height="200" class="img-thumbnail" />
+                                            </a>
+                                        </li>
+                                        <!--end of thumbnails-->
+                                    </ul>
+                                </td>
+
+                            }
+                        </tr>
+                    </table>
+
+                }
+                @*@Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            <div id="dynamicimage">
+
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.CategoryID)
+        @Html.HiddenFor(model => model.UploadUserID)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Status, ViewBag.ItemStatus as List<SelectListItem>,  new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="file" name="Imagefile" multiple />
-            <p style="color:darkcyan;">Please upload file of type ".jpg, .png, .jpeg"</p>
-            @*   <img src="@Url.Content(Model.ImagePath)" width="150" height="250" />*@
-            @{
-               
-                var s = Model.ImagePath;
-                string[] imgpath = s.Split('|');
-                <ul class="list-inline">
-                    <li data-toggle="modal" data-target="#myModal">
-                        <a href="#myGallery" data-slide-to="0">
-                            <img src="@Url.Content(imgpath[0])" width="200" height="200" class="img-thumbnail" />
-                        </a>
-                    </li>
-                    <!--end of thumbnails-->
-                </ul>
-
-                <p />
-                <p />
-                <table class="dl-horizontal">
-                    <tr>
-                        @for (int i = 1; i < imgpath.Length; i++)
-                        {
-
-                            <td>
-                                <ul class="list-inline">
-                                    <li data-toggle="modal" data-target="#myModal">
-                                        <a href="#myGallery" data-slide-to=@i>
-                                            <img src="@Url.Content(imgpath[i])" width="200" height="200" class="img-thumbnail" />
-                                        </a>
-                                    </li>
-                                    <!--end of thumbnails-->
-                                </ul>
-                            </td>
-
-                        }
-                    </tr>
-                </table>
-
-            }
-            @*@Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })*@
-        </div>
-    </div>
-    <div class="form-group">
-        <div id="dynamicimage">
-
-        </div>
-    </div>
-    @Html.HiddenFor(model => model.CategoryID)
-    @Html.HiddenFor(model => model.UploadUserID)
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
     }
     <div>
         @Html.ActionLink("Home", "Index", "Home", null, new { id = Model.ItemID })

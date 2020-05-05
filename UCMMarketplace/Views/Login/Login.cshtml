@@ -38,19 +38,25 @@ else
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Login" class="btn btn-default" />
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Login" class="btn btn-default" />
+                    </div>
                 </div>
+                @if (ViewBag.Status != null)
+                {
+                <p>
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong>@ViewBag.Message
+                    </div>
+                </p>
+                }
             </div>
+
         </div>
-        if (ViewBag.Status != null)
-        {
-            <div class="alert alert-danger">
-                <strong>Error!</strong>@ViewBag.Message
-            </div>
-        }
+      
+       
     }
 }
 <p>

@@ -15,6 +15,7 @@ namespace UCMMarketplace.Models
         public string Description { get; set; }
         public string Condition { get; set; }
         public string Status { get; set; }
+        [Display(Name = "Image File")]
         public string ImagePath { get; set; }
         public int UploadUserID { get; set; }
         public int CategoryID { get; set; }

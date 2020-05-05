@@ -51,16 +51,16 @@
             @Html.DisplayFor(model => modelitem.Price)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => modelitem.CategoryName)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.Condition)
         </dt>
         <dd>
             @Html.DisplayFor(model => modelitem.Condition)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => modelitem.CategoryName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Status)
@@ -75,7 +75,7 @@
             @{
                 //var s = Model.Book.Author_name.ToString();
                 s = modelitem.ImagePath;
-               // ViewBag.ItemId = modelitem.ItemID;
+                // ViewBag.ItemId = modelitem.ItemID;
                 string[] imgpath = s.Split('|');
                 <ul class="list-inline">
                     <li data-toggle="modal" data-target="#myModal">
@@ -112,18 +112,18 @@
         <dd>
 
             @if (Session["UserName"] != null && modelitem.UploadUserID == ViewBag.UserId)
-             {
+            {
                 @Html.ActionLink("Edit", "Edit", new { id = modelitem.ItemID })
                 <b>|</b>
                 @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
 
                 // @Html.Action("ShowMessage", "Message", new { itemID = modelitem.ItemID })
-             }
+            }
             else if (Session["UserName"] != null && modelitem.UploadUserID != ViewBag.UserId)
             {
                 @Html.ActionLink("Home", "Index", "Home", null, new { id = modelitem.ItemID })
-                <b>| Contact: @Session["EmailId"].ToString()</b>
-                
+                <b>| Contact: @ViewBag.EmailAdd</b>
+
             }
             else
             {

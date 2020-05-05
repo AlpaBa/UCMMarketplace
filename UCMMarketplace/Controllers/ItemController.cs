@@ -46,6 +46,10 @@ namespace UCMMarketplace.Controllers
                 string extension = Path.GetExtension(file.FileName);
                 
                 filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                if (Directory.Exists("~/ItemImages")==false)
+                {
+                    Directory.CreateDirectory(Server.MapPath("~/ItemImages"));
+                }
                 if (imagefilename == "")
                 {
                     imagefilename = "~/ItemImages/" + filename;
@@ -63,6 +67,7 @@ namespace UCMMarketplace.Controllers
                     item.Status = "Available";
                     item.Condition = item.ItemCond;
                     item.Price = Convert.ToDouble(item.Price);
+                    item.CategoryList = item.CategoryList;
                     item.CategoryID = Convert.ToInt32(item.CategoryList);
                     item.UploadUserID = Convert.ToInt32(UserID); 
                     itemimage.items.Add(item);
@@ -103,10 +108,33 @@ namespace UCMMarketplace.Controllers
                     Status = x.Status,
                     UploadUserID = x.UploadUserID
                 }).Where(x => x.ItemID == id).ToList();
+                //To get Upload User data
+                GetUserData1(id);
                 return View(itemlist);
             }
 
         }
+        [NonAction]
+        public void GetUserData1(int itemid)
+        {
+            using (ucmmarketplaceEntities en = new ucmmarketplaceEntities())
+            {
+                string EmailAdd;
+                List<item> itemlists = en.items.ToList();
+                List<GetUserData> itemlist = itemlists.Select(x => new GetUserData
+                {
+                    ItemID = x.ItemID,
+                    UploadUserID = x.UploadUserID,
+                    EmailId = x.user.EmailId,
+                    UserId = x.user.UserId,
+                    UserName = x.user.UserName,
+                    ItemTitle = x.Title,
+                }).Where(x => x.ItemID == itemid && x.UploadUserID == x.UserId).ToList();
+                EmailAdd = itemlist.First().EmailId.ToString();
+                ViewBag.EmailAdd = EmailAdd;
+            }
+        }
+
         //Edit an item Assign condition and status dropdown
         [HttpGet]
         public ActionResult Edit(int id)
@@ -116,8 +144,11 @@ namespace UCMMarketplace.Controllers
 
             {
                 itemimage = en.items.Where(x => x.ItemID == id).FirstOrDefault();
-
+                var categorydatalist = en.categories.ToList();
+                SelectList catlist = new SelectList(categorydatalist, "CategoryID", "CategoryName");
+                ViewBag.categoryname = catlist;
             }
+            
             List<SelectListItem> Condition = new List<SelectListItem>()
                 {
                     new SelectListItem() { Value = "New", Text = "New", /*Selected = true, Disabled = true*/ },
@@ -202,6 +233,7 @@ namespace UCMMarketplace.Controllers
                             itemimage.Condition = itemimage.Condition;
                         }
                     itemimage.Price = item.Price;
+                    itemimage.CategoryList = item.CategoryList;
                     itemimage.CategoryID = item.CategoryID;//Convert.ToInt32(cg.categoryList.SelectedValue);
                     itemimage.UploadUserID = UserID;
                     itemimage.Imagefile = item.Imagefile;

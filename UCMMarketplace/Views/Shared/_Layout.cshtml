@@ -33,20 +33,25 @@
                 <div class="navbar-collapse collapse">
                     @if (Session["UserName"] == null)
                     {
-                        <ul class="nav navbar-nav mr-auto">
-                            <li>@Html.ActionLink("Post", "Login", "Login")</li>
-                            <li>@Html.ActionLink("Register", "Registration", "Login")</li>
-                            <li>@Html.ActionLink("Login", "Login", "Login")</li>
-                        </ul>
+                    <ul class="nav navbar-nav mr-auto">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Post", "Login", "Login")</li>
+                        <li>@Html.ActionLink("Register", "Registration", "Login")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Login")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
                      
 
                     }
                     else
                     {
-                        <ul class="nav navbar-nav mr-auto">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Post", "Add", "Item")</li>
-                        </ul>
+                    <ul class="nav navbar-nav mr-auto">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Post", "Add", "Item")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>@Html.ActionLink("Hello " + Session["Username"], "Index", "Home")</li>
                             <li>@Html.ActionLink("My Activity", "ShowActivity", "Activity")</li>

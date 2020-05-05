@@ -43,12 +43,14 @@
                   new SelectList(Enum.GetValues(typeof(UCMMarketplace.Models.ItemCondition))),
                   "Select Condition",
                   new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryList, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CategoryList", ViewBag.categoryname as SelectList, "Category Name", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryList, "", new { @class = "text-danger" })
             </div>
         </div>
 

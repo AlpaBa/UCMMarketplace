@@ -10,11 +10,25 @@ namespace UCMMarketplace.Controllers
     public class HomeController : Controller
     {
         //Get : Item
+        //[HttpGet]
+        //public ActionResult Index()
+        //{
+        //    ucmmarketplaceEntities en = new ucmmarketplaceEntities();
+        //    return View(en.items.ToList());
+        //}
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            ucmmarketplaceEntities en = new ucmmarketplaceEntities();
-            return View(en.items.ToList());
+            if (search == "")
+            {
+                ucmmarketplaceEntities en = new ucmmarketplaceEntities();
+                return View(en.items.ToList());
+            }
+            else
+            {
+                ucmmarketplaceEntities en = new ucmmarketplaceEntities();
+                return View(en.items.Where(x => x.Title.Contains(search) || search == null).ToList());
+            }
         }
         public ActionResult About()
         {
