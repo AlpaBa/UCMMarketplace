@@ -34,11 +34,11 @@ namespace UCMMarketplace.Models
         public Nullable<int> StudentId { get; set; }
         [Display(Name = "Email Address")]
         // [Required(ErrorMessage = "Email is required.")]
-       // [RegularExpression(@"^[a-zA-Z0-9\-\.]+\ucmo.(EDU)$", ErrorMessage = "Enter valid University Email Addres")]
+        // [RegularExpression(@"^[a-zA-Z0-9\-\.]+\ucmo.(EDU)$", ErrorMessage = "Enter valid University Email Addres")]
         [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         public string EmailId { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> items { get; set; }
-       // public virtual ICollection<wishlist> wishlists { get; set; }
+        // public virtual ICollection<wishlist> wishlists { get; set; }
     }
 }

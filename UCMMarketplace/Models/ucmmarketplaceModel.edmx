@@ -17,9 +17,9 @@
             <PropertyRef Name="ItemID" />
           </Key>
           <Property Name="ItemID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="ImagePath" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="45" />
+          <Property Name="Title" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
           <Property Name="Price" Type="double" />
           <Property Name="Condition" Type="varchar" MaxLength="45" />
           <Property Name="Status" Type="varchar" MaxLength="45" Nullable="false" />
@@ -110,9 +110,9 @@
             <PropertyRef Name="ItemID" />
           </Key>
           <Property Name="ItemID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Double" />
           <Property Name="Condition" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />

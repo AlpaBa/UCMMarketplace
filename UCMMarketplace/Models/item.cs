@@ -28,7 +28,7 @@ namespace UCMMarketplace.Models
         [Display(Name = "Upload Image File")]
         //[RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.jpeg)$", ErrorMessage = "Only Image files allowed.")]
         public string ImagePath { get; set; }
-       // [DataType(DataType.MultilineText)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [DisplayFormat(DataFormatString = "{0:C}")]
         public Nullable<double> Price { get; set; }

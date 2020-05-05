@@ -11,7 +11,7 @@ namespace UCMMarketplace.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class message
     {
         public int MessageID { get; set; }
