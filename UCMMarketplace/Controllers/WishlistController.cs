@@ -9,7 +9,7 @@ namespace UCMMarketplace.Controllers
 {
     public class WishlistController : Controller
     {
-        // GET: Wishlist
+        // GET: SaveItemtoWishlist
         [HttpGet]
         public ActionResult SaveItemtoWishlist(int itemid)
         {
@@ -30,7 +30,7 @@ namespace UCMMarketplace.Controllers
             }
             return View();
         }
-
+        //Removes Item from Wishlist
         public ActionResult RemoveItemfromWishlist(int itemid)
         {
             using (ucmmarketplaceEntities en = new ucmmarketplaceEntities())

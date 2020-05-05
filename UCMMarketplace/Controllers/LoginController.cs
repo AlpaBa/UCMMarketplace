@@ -34,7 +34,7 @@ namespace UCMMarketplace.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(user user)
         {
-           // bool LogStatus = false;
+           
             if (ModelState.IsValid)
             {
                 
@@ -90,10 +90,11 @@ namespace UCMMarketplace.Controllers
             if (ModelState.IsValid)
             {
                 //Email is already Exists
-                var isExist = IsEmailExist(user.UserName);
+                var isExist = IsEmailExist(user.UserName,user.EmailId);
                 if (isExist)
                 {
                     ModelState.AddModelError("AccountExist", "Account already exist.");
+                    Status = false;
                     return View(user);
                 }
                 //password hashing
@@ -116,6 +117,7 @@ namespace UCMMarketplace.Controllers
             else
             {
                 message = "Invalid Request";
+                Status = false;
             }
             ViewBag.Message = message;
             ViewBag.Status = Status;
@@ -128,12 +130,15 @@ namespace UCMMarketplace.Controllers
         }
 
         [NonAction]
-        public bool IsEmailExist(string emailID)
+        public bool IsEmailExist(string UserName, string EmailID )
         {
             using (ucmmarketplaceEntities entity = new ucmmarketplaceEntities())
             {
-                var v = entity.users.Where(a => a.EmailId == emailID).FirstOrDefault();
-                return v != null;
+                
+                var record = entity.users.Where(x => x.UserName == UserName || x.EmailId == EmailID).Select(x => x).FirstOrDefault();
+                
+                //var v = entity.users.Where(a => a.EmailId == email.EmailId).FirstOrDefault();
+                return record != null;
             }
         }
         [NonAction]

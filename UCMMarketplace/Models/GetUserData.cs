@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+//Created by : Alpa Bandekar
+// Class for User and Item Data
 namespace UCMMarketplace.Models
 {
     public class GetUserData

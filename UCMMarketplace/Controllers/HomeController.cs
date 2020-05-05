@@ -16,6 +16,8 @@ namespace UCMMarketplace.Controllers
         //    ucmmarketplaceEntities en = new ucmmarketplaceEntities();
         //    return View(en.items.ToList());
         //}
+
+        //Get Item Data
         [HttpGet]
         public ActionResult Index(string search)
         {
@@ -30,12 +32,14 @@ namespace UCMMarketplace.Controllers
                 return View(en.items.Where(x => x.Title.Contains(search) || search == null).ToList());
             }
         }
+        //About Page
         public ActionResult About()
         {
             ViewBag.Message = "Buy-Sell-Go";
 
             return View();
         }
+        //Contact Page
         public ActionResult Contact()
         {
             ViewBag.Message = "";
@@ -80,18 +84,5 @@ namespace UCMMarketplace.Controllers
             }
         }
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
-
-        //    return View();
-        //}
     }
 }

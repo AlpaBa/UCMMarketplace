@@ -5,6 +5,7 @@
         width: 100%;
     }
 </style>
+@*Shows Activity*@
 <div>
     <h2>My Activity</h2>
     <hr />
@@ -16,7 +17,7 @@
                 <a href="@Url.Action("View", "Item", new { id = UrlParameter.Optional })\@i.ItemID" target="_blank">
                     <div class="thumbnail">
                         @{
-                            //var s = Model.Book.Author_name.ToString();
+                            
                             var s = i.ImagePath.ToString();
                             string[] imgpath = s.Split('|');
                             <img src="@Url.Content(imgpath[0])" class="img-thumbnail" />

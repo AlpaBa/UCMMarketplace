@@ -65,6 +65,7 @@ namespace UCMMarketplace.Controllers
                 {
                     if (imagefilename != "") { item.ImagePath = imagefilename; }
                     item.Status = "Available";
+                    item.Description = item.Description;
                     item.Condition = item.ItemCond;
                     item.Price = Convert.ToDouble(item.Price);
                     item.CategoryList = item.CategoryList;
@@ -234,6 +235,7 @@ namespace UCMMarketplace.Controllers
                         }
                     itemimage.Price = item.Price;
                     itemimage.CategoryList = item.CategoryList;
+                    
                     itemimage.CategoryID = item.CategoryID;//Convert.ToInt32(cg.categoryList.SelectedValue);
                     itemimage.UploadUserID = UserID;
                     itemimage.Imagefile = item.Imagefile;

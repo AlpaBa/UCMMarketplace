@@ -12,7 +12,7 @@ namespace UCMMarketplace.Controllers
     public class MessageController : Controller
     {
         //TODO Shweta
-        // GET: Message
+        // GET: Show Message
         public PartialViewResult ShowMessage(int itemId)
         {
             using (ucmmarketplaceEntities en = new ucmmarketplaceEntities())
@@ -31,7 +31,7 @@ namespace UCMMarketplace.Controllers
             }
         }
 
-        // GET: Message/Details/5
+        // Send Message thorough Email
         public ActionResult SendMessage(string emailid,string strmessage,string sendername,string recievername, string itemtitle, int itemid)
         {
             SendMessageEmail(emailid, strmessage, sendername, recievername,itemtitle);
